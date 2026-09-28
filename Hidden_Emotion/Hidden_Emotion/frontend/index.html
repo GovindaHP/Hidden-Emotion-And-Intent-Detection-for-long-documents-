@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hidden Emotion & Intent Detection From Long Documents | AI Analysis Platform</title>
+  <!-- Google Fonts & FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="container-fluid px-4">
+      <a class="navbar-brand d-flex align-items-center me-4" href="#">
+        <div class="rounded-circle p-2 me-2" style="background: var(--gradient-primary)">
+          <i class="fas fa-brain text-white fs-5"></i>
+        </div>
+        <span class="brand-gradient fs-4 brand-font">SENTIMENT<span class="text-white opacity-75">AI</span></span>
+      </a>
+
+      <button class="navbar-toggler border-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <i class="fas fa-bars text-light"></i>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="nav nav-pills me-auto" id="mainTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link nav-link-custom active" id="nav-workspace-tab" data-bs-toggle="tab" data-bs-target="#nav-workspace" type="button" role="tab">
+              <i class="fas fa-file-alt me-2"></i> Workspace
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link nav-link-custom" id="nav-history-tab" data-bs-toggle="tab" data-bs-target="#nav-history" type="button" role="tab">
+              <i class="fas fa-history me-2"></i> Analysis History
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link nav-link-custom" id="nav-analytics-tab" data-bs-toggle="tab" data-bs-target="#nav-analytics" type="button" role="tab">
+              <i class="fas fa-chart-pie me-2"></i> Visual Analytics
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link nav-link-custom" id="nav-admin-tab" data-bs-toggle="tab" data-bs-target="#nav-admin" type="button" role="tab">
+              <i class="fas fa-user-shield me-2"></i> Admin Portal
+            </button>
+          </li>
+        </ul>
+
+        <div class="d-flex align-items-center gap-3">
+          <button class="btn btn-glass btn-sm" id="themeToggleBtn" title="Toggle Light/Dark Theme">
+            <i class="fas fa-sun text-warning me-1" id="themeToggleIcon"></i> 
+            <span id="themeToggleLabel">Light Mode</span>
+          </button>
+          <span class="pill-badge pill-emerald"><i class="fas fa-circle-check"></i> System Operational</span>
+          <button class="btn btn-glass btn-sm" id="userProfileBtn">
+            <i class="fas fa-sign-in-alt me-1"></i> Login / Register
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Container -->
+  <div class="container-fluid px-4 py-4">
+    <div class="tab-content" id="mainTabContent">
+
+      <!-- WORKSPACE TAB -->
+      <div class="tab-pane fade show active" id="nav-workspace" role="tabpanel">
+        
+        <!-- Input Hub -->
+        <div class="row mb-4">
+          <div class="col-12">
+            <div class="glass-card">
+              <div class="glass-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0 text-white"><i class="fas fa-cloud-upload-alt me-2 text-primary"></i> Long Document Intake & AI Pipeline</h5>
+                <span class="badge bg-primary-subtle text-primary border border-primary-subtle">Transformer LongDoc Engine</span>
+              </div>
+              <div class="card-body p-4">
+
+                <!-- Tabs for File Upload vs Text Paste -->
+                <ul class="nav nav-tabs border-secondary mb-3" id="inputTab" role="tablist">
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link active text-light" id="tab-file-btn" data-bs-toggle="tab" data-bs-target="#tab-file" type="button">
+                      <i class="fas fa-file-upload me-2 text-info"></i> Upload Document (PDF, DOCX, TXT)
+                    </button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link text-light" id="tab-text-btn" data-bs-toggle="tab" data-bs-target="#tab-text" type="button">
+                      <i class="fas fa-paste me-2 text-warning"></i> Paste Long Text
+                    </button>
+                  </li>
+                </ul>
+
+                <div class="tab-content" id="inputTabContent">
+                  <!-- File Upload Pane -->
+                  <div class="tab-pane fade show active" id="tab-file" role="tabpanel">
+                    <div class="row">
+                      <div class="col-md-8">
+                        <div class="dropzone" id="fileDropzone">
+                          <i class="fas fa-file-lines fs-1 mb-3 text-primary opacity-75"></i>
+                          <h6 class="fw-semibold">Drag & Drop Long Document Here</h6>
+                          <p class="text-secondary small mb-0">Supports PDF, DOCX, TXT, Research Papers, Medical Reports, Legal Docs</p>
+                          <input type="file" id="fileInput" class="d-none" accept=".pdf,.docx,.txt,.md">
+                          <div id="selectedFileName" class="mt-3 d-none pill-badge pill-purple"></div>
+                        </div>
+                      </div>
+                      <div class="col-md-4 d-flex flex-column justify-content-between">
+                        <div>
+                          <label class="form-label text-secondary small fw-semibold">DOCUMENT TYPE CLASSIFICATION</label>
+                          <select class="form-select form-select-custom mb-3" id="fileDocTypeSelect">
+                            <option value="General">General Long Document</option>
+                            <option value="Complaint Letter">Formal Complaint Letter</option>
+                            <option value="Research Paper">Academic Research Paper</option>
+                            <option value="Medical Report">Medical & Clinical Report</option>
+                            <option value="Legal Document">Legal / Dispute Notice</option>
+                            <option value="Email Communication">Corporate Email Thread</option>
+                            <option value="Customer Review">Customer Product Review</option>
+                          </select>
+                        </div>
+                        <button class="btn btn-gradient w-100 py-3" id="btnProcessFile">
+                          <i class="fas fa-microchip me-2"></i> Run AI Analysis Report
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Text Paste Pane -->
+                  <div class="tab-pane fade" id="tab-text" role="tabpanel">
+                    <div class="row">
+                      <div class="col-md-8">
+                        <input type="text" class="form-control form-control-custom mb-2" id="textTitleInput" placeholder="Document Title (e.g. Project Escalation Email)">
+                        <textarea class="form-control form-control-custom" id="rawTextInput" rows="6" placeholder="Paste your long document content here... (Context across the entire document will be analyzed)"></textarea>
+                      </div>
+                      <div class="col-md-4 d-flex flex-column justify-content-between">
+                        <div>
+                          <label class="form-label text-secondary small fw-semibold">DOCUMENT TYPE HINT</label>
+                          <select class="form-select form-select-custom mb-3" id="textDocTypeSelect">
+                            <option value="General">General Text</option>
+                            <option value="Complaint Letter">Formal Complaint</option>
+                            <option value="Medical Report">Medical Context</option>
+                            <option value="Legal Document">Legal Contract/Claim</option>
+                            <option value="Customer Feedback">Customer Review</option>
+                          </select>
+                        </div>
+                        <button class="btn btn-gradient w-100 py-3" id="btnProcessText">
+                          <i class="fas fa-brain me-2"></i> Analyze Text
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- REPORT OUTPUT SECTION -->
+        <div id="reportOutputContainer" class="d-none">
+
+          <!-- Document Header Card -->
+          <div class="glass-card mb-4 p-4 border-start border-4 border-primary">
+            <div class="row align-items-center">
+              <div class="col-md-7">
+                <span class="badge bg-primary mb-2" id="metaDocType">Document Type</span>
+                <h3 class="fw-bold mb-1 text-white" id="metaDocName">Document Title</h3>
+                <p class="text-secondary small mb-0">
+                  <i class="fas fa-clock me-1"></i> Analyzed: <span id="metaUploadTime"></span> | 
+                  <i class="fas fa-font me-1"></i> Word Count: <span id="metaWordCount"></span> | 
+                  <i class="fas fa-book-open me-1"></i> Reading Time: <span id="metaReadingTime"></span>
+                </p>
+              </div>
+              <div class="col-md-5 text-md-end mt-3 mt-md-0">
+                <span class="badge bg-dark border border-secondary fs-6 p-2 me-2" id="metaReportId">REP-00000000</span>
+                <div class="btn-group">
+                  <button class="btn btn-glass btn-sm" id="btnExportPdf"><i class="fas fa-file-pdf text-danger me-1"></i> Export PDF</button>
+                  <button class="btn btn-glass btn-sm" id="btnExportJson"><i class="fas fa-code text-info me-1"></i> JSON</button>
+                  <button class="btn btn-glass btn-sm" id="btnExportCsv"><i class="fas fa-file-csv text-success me-1"></i> CSV</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- EXECUTIVE 30-SECOND SUMMARY BANNER (Primary Project Goal: Zero-Reading Instant Insights) -->
+          <div class="glass-card mb-4 p-4 border-start border-4 border-warning" style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(99, 102, 241, 0.08) 100%);">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h5 class="fw-bold mb-0 text-white"><i class="fas fa-bolt text-warning me-2"></i> Executive 30-Second Summary (Instant Document Comprehension)</h5>
+              <span class="pill-badge pill-amber"><i class="fas fa-clock-rotate-left me-1"></i> Saves 95% Reading Time</span>
+            </div>
+            <div class="row g-3">
+              <div class="col-md-4">
+                <div class="p-3 rounded-3 bg-dark border border-secondary h-100">
+                  <small class="text-warning fw-semibold d-block mb-1"><i class="fas fa-file-alt me-1"></i> WHAT HAPPENED (ANALYZED SYNTHESIS)</small>
+                  <p class="text-light small mb-0 fw-medium" id="execWhatHappened">--</p>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="p-3 rounded-3 bg-dark border border-secondary h-100">
+                  <small class="text-danger fw-semibold d-block mb-1"><i class="fas fa-heart-pulse me-1"></i> DETECTED EMOTION & PSYCHOLOGY</small>
+                  <p class="text-light small mb-0 fw-medium" id="execAuthorFeels">--</p>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="p-3 rounded-3 bg-dark border border-secondary h-100">
+                  <small class="text-info fw-semibold d-block mb-1"><i class="fas fa-bullseye me-1"></i> UNDERLYING INTENT & OBJECTIVE</small>
+                  <p class="text-light small mb-0 fw-medium" id="execAuthorWants">--</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Grid Row 1: Emotion & Intent Analysis -->
+          <div class="row mb-4">
+            <!-- Emotion Analysis -->
+            <div class="col-lg-6 mb-4 mb-lg-0">
+              <div class="glass-card h-100">
+                <div class="glass-header d-flex justify-content-between align-items-center">
+                  <h5 class="mb-0 text-white"><i class="fas fa-heart-pulse me-2 text-danger"></i> Psychological Emotion Analysis</h5>
+                  <span class="pill-badge pill-purple" id="emotionConfidenceVal">--% Confidence</span>
+                </div>
+                <div class="card-body p-4">
+                  <div class="d-flex flex-wrap gap-3 mb-3">
+                    <div><small class="text-muted d-block fw-semibold">DETECTED EMOTION</small><span class="pill-badge pill-rose fs-6 fw-bold" id="primaryEmotionBadge">--</span></div>
+                    <div><small class="text-muted d-block fw-semibold">HIDDEN EMOTION</small><span class="pill-badge pill-amber fs-6 fw-bold" id="hiddenEmotionBadge">--</span></div>
+                  </div>
+
+                  <div class="p-3 mb-3 rounded-3" style="background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border)">
+                    <span class="badge bg-secondary mb-1">OVERALL TONE</span>
+                    <h6 class="text-light fw-bold mb-1" id="overallToneBadge">--</h6>
+                    <p class="text-secondary small mb-0" id="emotionReasoningText">--</p>
+                  </div>
+
+                  <!-- Emotion Distribution Chart & Progress Bars -->
+                  <div class="row align-items-center mb-3">
+                    <div class="col-6 position-relative" style="height: 160px;">
+                      <canvas id="emotionChartCanvas"></canvas>
+                    </div>
+                    <div class="col-6">
+                      <small class="text-secondary fw-semibold">SENTIMENT SPLIT</small>
+                      <div class="mt-2">
+                        <div class="d-flex justify-content-between small text-light"><span>Positive</span><span id="posVal">0%</span></div>
+                        <div class="progress mb-2" style="height: 6px;"><div class="progress-bar bg-success" id="posBar" style="width: 0%"></div></div>
+
+                        <div class="d-flex justify-content-between small text-light"><span>Neutral</span><span id="neuVal">0%</span></div>
+                        <div class="progress mb-2" style="height: 6px;"><div class="progress-bar bg-secondary" id="neuBar" style="width: 0%"></div></div>
+
+                        <div class="d-flex justify-content-between small text-light"><span>Negative</span><span id="negVal">0%</span></div>
+                        <div class="progress" style="height: 6px;"><div class="progress-bar bg-danger" id="negBar" style="width: 0%"></div></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h6 class="fw-semibold text-light mb-2"><i class="fas fa-quote-left me-1 text-primary"></i> Supporting Evidence Sentences</h6>
+                  <ul class="list-group list-group-flush rounded-3" id="emotionEvidenceList"></ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Intent Analysis -->
+            <div class="col-lg-6">
+              <div class="glass-card h-100">
+                <div class="glass-header d-flex justify-content-between align-items-center">
+                  <h5 class="mb-0 text-white"><i class="fas fa-bullseye me-2 text-warning"></i> Contextual Intent Analysis</h5>
+                  <span class="pill-badge pill-blue" id="intentConfidenceVal">--% Confidence</span>
+                </div>
+                <div class="card-body p-4">
+                  <div class="mb-3">
+                    <small class="text-muted d-block mb-1">DETECTED INTENT</small>
+                    <span class="pill-badge pill-blue fs-5 fw-bold" id="primaryIntentBadge">--</span>
+                  </div>
+
+                  <div class="p-3 mb-3 rounded-3" style="background: rgba(245, 158, 11, 0.05); border: 1px solid rgba(245, 158, 11, 0.2)">
+                    <small class="text-warning fw-semibold d-block"><i class="fas fa-network-wired me-1"></i> CONTEXTUAL FLOW ANALYSIS (2-3 LINES)</small>
+                    <p class="text-light small mb-0 mt-1" id="intentReasoningText">--</p>
+                  </div>
+
+                  <h6 class="fw-semibold text-light mb-2"><i class="fas fa-quote-right me-1 text-warning"></i> Key Supporting Sentences</h6>
+                  <ul class="list-group list-group-flush rounded-3" id="intentSupportingSentences"></ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- UNIQUE FEATURE ROW: AI Empathy & De-escalation Auto-Responder -->
+          <div class="row mb-4">
+            <div class="col-12">
+              <div class="glass-card border-start border-4 border-emerald">
+                <div class="glass-header d-flex justify-content-between align-items-center">
+                  <h5 class="mb-0 text-white">
+                    <i class="fas fa-robot me-2 text-emerald"></i> 
+                    <span class="badge bg-emerald text-dark me-2">UNIQUE FEATURE</span>
+                    AI Empathy & De-escalation Auto-Responder Draft
+                  </h5>
+                  <button class="btn btn-sm btn-outline-success" id="btnCopyDeescalation">
+                    <i class="fas fa-copy me-1"></i> Copy Response Script
+                  </button>
+                </div>
+                <div class="card-body p-4">
+                  <div class="row">
+                    <div class="col-md-4 mb-3 mb-md-0">
+                      <div class="p-3 rounded-3 bg-dark border border-secondary h-100">
+                        <small class="text-muted d-block">TARGET INTENT ADDRESSED</small>
+                        <p class="text-emerald fw-bold mb-2" id="deescalationTargetIntent">--</p>
+
+                        <small class="text-muted d-block">EMPATHY ALIGNED TO</small>
+                        <p class="text-light small mb-2" id="deescalationPrimaryEmotion">--</p>
+
+                        <small class="text-muted d-block">HIDDEN PSYCHOLOGY ADDRESSED</small>
+                        <p class="text-amber small mb-0" id="deescalationHiddenEmotion">--</p>
+                      </div>
+                    </div>
+                    <div class="col-md-8">
+                      <div class="mb-2">
+                        <small class="text-secondary fw-semibold">SUBJECT LINE</small>
+                        <input type="text" class="form-control form-control-custom text-light bg-dark border-secondary" id="deescalationSubject" readonly>
+                      </div>
+                      <div>
+                        <small class="text-secondary fw-semibold">TAILORED DE-ESCALATION SCRIPT</small>
+                        <textarea class="form-control form-control-custom text-light bg-dark border-secondary" id="deescalationScript" rows="6" readonly></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Grid Row 2: Summary Insight & Multi-tier Summaries -->
+          <div class="row mb-4">
+            <!-- Summary Insight Box -->
+            <div class="col-lg-7 mb-4 mb-lg-0">
+              <div class="glass-card h-100">
+                <div class="glass-header">
+                  <h5 class="mb-0 text-white"><i class="fas fa-lightbulb me-2 text-amber"></i> Summary Insight (Human Reader Synthesis)</h5>
+                </div>
+                <div class="card-body p-4">
+                  <div class="row g-3 mb-3">
+                    <div class="col-md-6">
+                      <div class="p-3 rounded-3 bg-dark border border-secondary h-100">
+                        <span class="badge bg-primary mb-1">WHAT HAPPENED</span>
+                        <p class="text-light small mb-0" id="insightWhatHappened">--</p>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="p-3 rounded-3 bg-dark border border-secondary h-100">
+                        <span class="badge bg-danger mb-1">WHY USER FEELS THIS WAY</span>
+                        <p class="text-light small mb-0" id="insightWhyFeels">--</p>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="p-3 rounded-3 bg-dark border border-secondary h-100">
+                        <span class="badge bg-warning text-dark mb-1">WHAT USER WANTS</span>
+                        <p class="text-light small mb-0" id="insightWhatWants">--</p>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="p-3 rounded-3 bg-dark border border-secondary h-100">
+                        <span class="badge bg-info text-dark mb-1">PROBLEM IDENTIFIED</span>
+                        <p class="text-light small mb-0" id="insightProblem">--</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="p-3 rounded-3" style="background: rgba(99, 102, 241, 0.08); border: 1px solid rgba(99, 102, 241, 0.2)">
+                    <h6 class="fw-bold text-primary mb-1"><i class="fas fa-quote-left me-2"></i> Psychological & Intent Narrative</h6>
+                    <p class="text-light fst-italic mb-0" id="insightNarrative">--</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Multi-tier Summaries -->
+            <div class="col-lg-5">
+              <div class="glass-card h-100">
+                <div class="glass-header">
+                  <h5 class="mb-0 text-white"><i class="fas fa-compress-alt me-2 text-cyan"></i> Document Summaries</h5>
+                </div>
+                <div class="card-body p-4">
+                  <ul class="nav nav-pills nav-fill mb-3" id="summaryTab" role="tablist">
+                    <li class="nav-item"><button class="nav-link active py-1 small" data-bs-toggle="tab" data-bs-target="#sum-short">Short</button></li>
+                    <li class="nav-item"><button class="nav-link py-1 small" data-bs-toggle="tab" data-bs-target="#sum-medium">Medium</button></li>
+                    <li class="nav-item"><button class="nav-link py-1 small" data-bs-toggle="tab" data-bs-target="#sum-detailed">Detailed</button></li>
+                    <li class="nav-item"><button class="nav-link py-1 small" data-bs-toggle="tab" data-bs-target="#sum-bullet">Bullets</button></li>
+                  </ul>
+                  <div class="tab-content p-2">
+                    <div class="tab-pane fade show active" id="sum-short"><p class="text-light small" id="shortSummaryText">--</p></div>
+                    <div class="tab-pane fade" id="sum-medium"><p class="text-light small" id="mediumSummaryText">--</p></div>
+                    <div class="tab-pane fade" id="sum-detailed"><p class="text-light small style-pre-line" id="detailedSummaryText">--</p></div>
+                    <div class="tab-pane fade" id="sum-bullet"><ul class="text-light small ps-3" id="bulletSummaryList"></ul></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Grid Row 3: Emotional Timeline & Important Sentences -->
+          <div class="row mb-4">
+            <!-- Emotional Timeline -->
+            <div class="col-lg-6 mb-4 mb-lg-0">
+              <div class="glass-card h-100">
+                <div class="glass-header">
+                  <h5 class="mb-0 text-white"><i class="fas fa-chart-line me-2 text-emerald"></i> Emotional Timeline Trajectory</h5>
+                </div>
+                <div class="card-body p-4">
+                  <div style="height: 180px;" class="mb-3">
+                    <canvas id="timelineChartCanvas"></canvas>
+                  </div>
+                  <div id="timelineNodesContainer"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Important Sentences & Topics -->
+            <div class="col-lg-6">
+              <div class="glass-card h-100">
+                <div class="glass-header">
+                  <h5 class="mb-0 text-white"><i class="fas fa-star me-2 text-warning"></i> Topic & Top 10 Key Sentences</h5>
+                </div>
+                <div class="card-body p-4">
+                  <div class="mb-3">
+                    <small class="text-muted d-block">MAIN TOPIC</small>
+                    <span class="pill-badge pill-purple fs-6" id="mainTopicBadge">--</span>
+                    <div id="subTopicsContainer" class="mt-1"></div>
+                  </div>
+                  <h6 class="fw-semibold text-light mb-2">Central Sentences</h6>
+                  <ul class="list-group list-group-flush rounded-3" id="importantSentencesList"></ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Grid Row 4: Document Synthesis & Confidence Breakdown -->
+          <div class="row mb-4">
+            <div class="col-lg-7 mb-4 mb-lg-0">
+              <div class="glass-card h-100">
+                <div class="glass-header">
+                  <h5 class="mb-0 text-white"><i class="fas fa-shield-cat me-2 text-info"></i> Psychological Synthesis & Risk Posture</h5>
+                </div>
+                <div class="card-body p-4 d-flex flex-column justify-content-center">
+                  <div class="p-4 rounded-3" style="background: rgba(99, 102, 241, 0.06); border: 1px solid rgba(99, 102, 241, 0.2)">
+                    <h6 class="fw-bold brand-gradient mb-2 fs-5"><i class="fas fa-brain me-2"></i> Comprehensive Document Assessment</h6>
+                    <p class="text-light mb-0 fs-6 leading-relaxed" id="finalConclusionText">--</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Confidence Scores Breakdown -->
+            <div class="col-lg-5">
+              <div class="glass-card h-100">
+                <div class="glass-header">
+                  <h5 class="mb-0 text-white"><i class="fas fa-gauge-high me-2 text-purple"></i> Confidence Breakdown</h5>
+                </div>
+                <div class="card-body p-4">
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-secondary">Emotion Detection</span>
+                    <span class="badge bg-primary" id="confScoreEmotion">0%</span>
+                  </div>
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-secondary">Intent Detection</span>
+                    <span class="badge bg-info text-dark" id="confScoreIntent">0%</span>
+                  </div>
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-secondary">Summarization</span>
+                    <span class="badge bg-success" id="confScoreSummary">0%</span>
+                  </div>
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-secondary">Contextual Flow Tracking</span>
+                    <span class="badge bg-warning text-dark" id="confScoreFlow">0%</span>
+                  </div>
+                  <hr class="border-secondary">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span class="fw-bold text-light">Overall System Prediction</span>
+                    <span class="badge bg-gradient fs-6 p-2" id="confScoreOverall">0%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- HISTORY TAB -->
+      <div class="tab-pane fade" id="nav-history" role="tabpanel">
+        <div class="glass-card p-4">
+          <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
+            <h5 class="mb-0 text-white"><i class="fas fa-history me-2 text-primary"></i> Upload & Prediction History</h5>
+            <div class="d-flex gap-2">
+              <input type="text" class="form-control form-control-custom" id="historySearchInput" placeholder="Search filename or ID...">
+              <select class="form-select form-select-custom" id="historyEmotionFilter">
+                <option value="">All Emotions</option>
+                <option value="Anger">Anger / Frustration</option>
+                <option value="Joy">Joy / Optimism</option>
+                <option value="Fear">Fear / Anxiety</option>
+                <option value="Sadness">Sadness</option>
+              </select>
+              <select class="form-select form-select-custom" id="historyIntentFilter">
+                <option value="">All Intents</option>
+                <option value="Technical Assistance">Technical Assistance</option>
+                <option value="Complaint">Formal Complaint</option>
+                <option value="Medical">Medical Anxiety</option>
+                <option value="Legal">Legal Notice</option>
+              </select>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-custom align-middle">
+              <thead>
+                <tr>
+                  <th>Report ID</th>
+                  <th>Document Name</th>
+                  <th>Type</th>
+                  <th>Primary Emotion</th>
+                  <th>Primary Intent</th>
+                  <th>Confidence</th>
+                  <th class="text-end">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="historyTableBody">
+                <tr><td colspan="7" class="text-center text-muted py-4">Loading history...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ANALYTICS TAB -->
+      <div class="tab-pane fade" id="nav-analytics" role="tabpanel">
+        <div class="row mb-4">
+          <div class="col-md-6 col-lg-3 mb-3">
+            <div class="glass-card p-3 text-center">
+              <small class="text-muted fw-semibold">TOTAL DOCUMENTS</small>
+              <h2 class="fw-bold text-gradient mb-0" id="analyticsTotalDocs">0</h2>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 mb-3">
+            <div class="glass-card p-3 text-center">
+              <small class="text-muted fw-semibold">AVERAGE CONFIDENCE</small>
+              <h2 class="fw-bold text-success mb-0" id="analyticsAvgConf">0%</h2>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-8">
+            <div class="glass-card p-4 mb-4">
+              <h5 class="text-white mb-3"><i class="fas fa-chart-bar me-2 text-purple"></i> Emotion Distribution Across Corpus</h5>
+              <div style="height: 250px;">
+                <canvas id="analyticsEmotionChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ADMIN TAB -->
+      <div class="tab-pane fade" id="nav-admin" role="tabpanel">
+        <div class="row mb-4">
+          <div class="col-md-3 mb-3">
+            <div class="glass-card p-3">
+              <small class="text-muted">DATABASE HEALTH</small>
+              <h5 class="text-emerald fw-bold mb-0" id="sysDbStatus">Active</h5>
+            </div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="glass-card p-3">
+              <small class="text-muted">TOTAL REGISTERED USERS</small>
+              <h5 class="text-info fw-bold mb-0" id="sysUserCount">0</h5>
+            </div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="glass-card p-3">
+              <small class="text-muted">DOCUMENTS STORED</small>
+              <h5 class="text-warning fw-bold mb-0" id="sysDocCount">0</h5>
+            </div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="glass-card p-3">
+              <small class="text-muted">PREDICTIONS RUN</small>
+              <h5 class="text-purple fw-bold mb-0" id="sysPredCount">0</h5>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6 mb-4">
+            <div class="glass-card p-4">
+              <h5 class="text-white mb-3"><i class="fas fa-users me-2 text-primary"></i> Registered Users</h5>
+              <div class="table-responsive">
+                <table class="table table-custom">
+                  <thead><tr><th>ID</th><th>Username</th><th>Email</th><th>Role</th><th>Created</th></tr></thead>
+                  <tbody id="adminUsersTableBody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="glass-card p-4">
+              <h5 class="text-white mb-3"><i class="fas fa-terminal me-2 text-warning"></i> System Activity Logs</h5>
+              <div class="table-responsive">
+                <table class="table table-custom">
+                  <thead><tr><th>Level</th><th>Event</th><th>Details</th><th>User</th><th>Timestamp</th></tr></thead>
+                  <tbody id="adminLogsTableBody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Processing Stepper Modal -->
+  <div class="modal fade" id="processingModal" data-bs-backdrop="static" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content glass-card border-0">
+        <div class="modal-body p-4 text-center">
+          <div class="spinner-border text-primary mb-3" role="status"></div>
+          <h5 class="text-white fw-bold">Analyzing Context Across Document...</h5>
+          <p class="text-secondary small mb-4">Transformer models processing chunk embeddings and intent trajectories</p>
+
+          <div class="text-start px-3">
+            <div class="stepper-item" id="stepExtract"><div class="stepper-icon"><i class="fas fa-file-export"></i></div> 1. Extracting Document Text</div>
+            <div class="stepper-item" id="stepClean"><div class="stepper-icon"><i class="fas fa-broom"></i></div> 2. Text Cleaning & Tokenization</div>
+            <div class="stepper-item" id="stepChunk"><div class="stepper-icon"><i class="fas fa-cubes"></i></div> 3. Semantic Overlapping Chunking</div>
+            <div class="stepper-item" id="stepEmbed"><div class="stepper-icon"><i class="fas fa-vector-square"></i></div> 4. All-MiniLM Embedding Generation</div>
+            <div class="stepper-item" id="stepPredict"><div class="stepper-icon"><i class="fas fa-brain"></i></div> 5. DistilRoBERTa Emotion & Intent Engine</div>
+            <div class="stepper-item" id="stepReport"><div class="stepper-icon"><i class="fas fa-chart-pie"></i></div> 6. Synthesizing Psychological AI Report</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Auth Modal -->
+  <div class="modal fade" id="authModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content glass-card border-0">
+        <div class="modal-header border-secondary">
+          <h5 class="modal-title text-white"><i class="fas fa-user-lock me-2 text-primary"></i> User Access</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body p-4">
+          <ul class="nav nav-pills nav-fill mb-3" id="authTab" role="tablist">
+            <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#loginPane">Login</button></li>
+            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#registerPane">Register</button></li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane fade show active" id="loginPane">
+              <div class="mb-3">
+                <label class="form-label text-secondary small">Email</label>
+                <input type="email" class="form-control form-control-custom" id="authEmail" value="admin@analyzer.ai">
+              </div>
+              <div class="mb-3">
+                <label class="form-label text-secondary small">Password</label>
+                <input type="password" class="form-control form-control-custom" id="authPassword" value="admin123">
+              </div>
+              <button class="btn btn-gradient w-100" id="btnLoginSubmit">Login</button>
+            </div>
+            <div class="tab-pane fade" id="registerPane">
+              <div class="mb-2">
+                <label class="form-label text-secondary small">Username</label>
+                <input type="text" class="form-control form-control-custom" id="authRegUsername" placeholder="e.g. jsmith">
+              </div>
+              <div class="mb-2">
+                <label class="form-label text-secondary small">Email</label>
+                <input type="email" class="form-control form-control-custom" id="authRegEmail" placeholder="jsmith@company.com">
+              </div>
+              <div class="mb-2">
+                <label class="form-label text-secondary small">Password</label>
+                <input type="password" class="form-control form-control-custom" id="authRegPassword">
+              </div>
+              <div class="mb-3">
+                <label class="form-label text-secondary small">Role</label>
+                <select class="form-select form-select-custom" id="authRegRole">
+                  <option value="user">User</option>
+                  <option value="admin">Admin</option>
+                </select>
+              </div>
+              <button class="btn btn-gradient w-100" id="btnRegisterSubmit">Register Account</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="/static/js/auth.js"></script>
+  <script src="/static/js/charts.js"></script>
+  <script src="/static/js/report.js"></script>
+  <script src="/static/js/history.js"></script>
+  <script src="/static/js/admin.js"></script>
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+import os
+import sys
+import webbrowser
+import threading
+import time
+import uvicorn
+
+backend_dir = os.path.dirname(os.path.abspath(__file__))
+if backend_dir not in sys.path:
+    sys.path.insert(0, backend_dir)
+
+from app.main import app
+
+def open_browser():
+    time.sleep(1.5)
+    try:
+        webbrowser.open("http://localhost:8000")
+    except Exception:
+        pass
+
+if __name__ == "__main__":
+    print("\n" + "=" * 65)
+    print("   SENTIMENTAL - Hidden Emotion & Intent Detection System")
+    print("=" * 65)
+    print(" Server is starting...")
+    print(" Web Interface: http://localhost:8000")
+    print(" Press CTRL+C to stop the server anytime.")
+    print("=" * 65 + "\n")
+
+    threading.Thread(target=open_browser, daemon=True).start()
+
+    uvicorn.run(app, host="127.0.0.1", port=8000)

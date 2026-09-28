@@ -1,0 +1,270 @@
+{
+  "dataset_info": {
+    "name": "Psychological Emotion & Trajectory Classification Dataset",
+    "version": "7.0",
+    "description": "Lexicons and psychologically grounded hidden emotion rules ensuring zero cross-domain hallucination and strictly source-grounded trajectory inference.",
+    "total_emotions": 7
+  },
+  "emotion_categories": {
+    "anger": {
+      "display_name": "Frustration & Anger",
+      "keywords": [
+        "frustrated",
+        "frustration",
+        "furious",
+        "annoyed",
+        "irritation",
+        "irritating",
+        "unacceptable",
+        "terrible",
+        "outraged",
+        "fail",
+        "broken",
+        "ridiculous",
+        "hate",
+        "scam",
+        "incompetent",
+        "demand",
+        "horrible",
+        "awful",
+        "useless",
+        "waste of time",
+        "waste",
+        "dumb",
+        "consumed hours",
+        "repeatedly asked",
+        "inconsistent",
+        "inconsistently",
+        "back and forth",
+        "persists",
+        "problem returned",
+        "bugs",
+        "blockers",
+        "struggled",
+        "unjustified",
+        "unfair deduction"
+      ],
+      "weight": 1.25
+    },
+    "sadness": {
+      "display_name": "Disappointment & Exhaustion",
+      "keywords": [
+        "depressed",
+        "hopeless",
+        "sad",
+        "disappointed",
+        "disappointment",
+        "regret",
+        "heartbroken",
+        "loss",
+        "grief",
+        "pain",
+        "failure",
+        "miserable",
+        "lonely",
+        "exhausted",
+        "exhaustion",
+        "giving up",
+        "doubt",
+        "distrust",
+        "unfortunate",
+        "unfortunate purchase",
+        "unresolved",
+        "questioning",
+        "loss of confidence",
+        "exhausting",
+        "drained",
+        "sleepless",
+        "chronic fatigue"
+      ],
+      "weight": 1.15
+    },
+    "fear": {
+      "display_name": "Anxiety & Apprehension",
+      "keywords": [
+        "worried",
+        "anxious",
+        "anxiety",
+        "scared",
+        "afraid",
+        "terrified",
+        "panic",
+        "risk",
+        "danger",
+        "uncertain",
+        "uncertainty",
+        "threat",
+        "dread",
+        "nervous",
+        "nervousness",
+        "vulnerable",
+        "concern",
+        "confusion",
+        "confused",
+        "mismatch",
+        "stress",
+        "stressful",
+        "deadline pressure",
+        "pressure",
+        "apprehension",
+        "running out of time",
+        "overwhelmed",
+        "deduction shock",
+        "health anxiety",
+        "abnormal markers",
+        "biopsy anxiety",
+        "diagnosis fear"
+      ],
+      "weight": 1.1
+    },
+    "joy": {
+      "display_name": "Satisfaction & Optimism",
+      "keywords": [
+        "happy",
+        "delighted",
+        "excited",
+        "excitement",
+        "grateful",
+        "satisfied",
+        "pleased",
+        "fantastic",
+        "excellent",
+        "thrilled",
+        "wonderful",
+        "successful",
+        "love",
+        "amazing",
+        "great",
+        "perfect",
+        "glad",
+        "relief",
+        "relieved",
+        "pride",
+        "proud",
+        "closure",
+        "accomplished",
+        "celebrated",
+        "restored",
+        "resolved",
+        "reassured",
+        "reassurance",
+        "benign",
+        "recovery progress"
+      ],
+      "weight": 1.0
+    },
+    "surprise": {
+      "display_name": "Astonishment & Intrigue",
+      "keywords": [
+        "unexpected",
+        "astonished",
+        "shocked",
+        "amazed",
+        "surprised",
+        "sudden",
+        "unbelievable",
+        "startled",
+        "curious",
+        "curiosity",
+        "discrepancy",
+        "unanticipated finding"
+      ],
+      "weight": 0.9
+    },
+    "disgust": {
+      "display_name": "Aversion & Resentment",
+      "keywords": [
+        "revolting",
+        "disgusting",
+        "offensive",
+        "appalling",
+        "nauseating",
+        "loathsome",
+        "gross",
+        "vile",
+        "nasty",
+        "toxic",
+        "unethical",
+        "severe nausea"
+      ],
+      "weight": 1.15
+    },
+    "neutral": {
+      "display_name": "Calm Determination & Neutrality",
+      "keywords": [
+        "standard",
+        "overview",
+        "process",
+        "report",
+        "details",
+        "information",
+        "data",
+        "status",
+        "document",
+        "system",
+        "summary",
+        "notes",
+        "cooperate",
+        "procedure",
+        "applicable",
+        "formal",
+        "determination",
+        "determined",
+        "resolution",
+        "evidence",
+        "timesheet",
+        "records",
+        "clinical evaluation",
+        "laboratory analysis"
+      ],
+      "weight": 0.8
+    }
+  },
+  "hidden_emotion_rules": [
+    {
+      "domain": "payroll",
+      "pattern": "\\b(attendance|salary|payroll|deduction|withheld|timesheet|biometric|payslip|wages)\\b.*\\b(discrepancy|evidence|investigated|corrected|restored|reimbursed|relief|closure)\\b",
+      "hidden_emotion": "Underlying Concern for Financial Security & Desire for Fair Resolution"
+    },
+    {
+      "domain": "project",
+      "pattern": "\\b(extension|deadline|submitted|finally|relief|proud|team|project|capstone|faculty|professor)\\b.*\\b(anxiety|stress|bugs|pressure|sleepless|exhausted)\\b",
+      "hidden_emotion": "Relieved Pride Masking Underlying Academic Exhaustion & Resilience"
+    },
+    {
+      "domain": "consumer",
+      "pattern": "\\b(return|refund|policy|unfortunate|procedure|straightforward|misunderstanding|device|troubleshooting)\\b.*\\b(rather|hope|believe|applicable)\\b",
+      "hidden_emotion": "Calm Determination Masking Loss of Consumer Trust & Disappointment"
+    },
+    {
+      "domain": "medical",
+      "pattern": "\\b(cardiologist|oncologist|biopsy|pathology report|cardiac mri|ct scan|clinical diagnosis|physician consultation)\\b.*\\b(anxiety|fear|worry|dread|vulnerability|relief|reassurance|hope)\\b",
+      "hidden_emotion": "Masked Health Vulnerability & Prognosis Apprehension Behind Clinical Inquiries"
+    },
+    {
+      "domain": "medical_postop",
+      "pattern": "\\b(post-op|post-operative|orthopedic surgery|surgical incision|wound healing|rehabilitation protocol)\\b.*\\b(pain|mobility|healing|progress|relief)\\b",
+      "hidden_emotion": "Guarded Resilience & Hope for Physical Recovery"
+    },
+    {
+      "domain": "medical_rx",
+      "pattern": "\\b(antihypertensive|prescription medication|dosage adjustment|drug interaction|adverse side effects)\\b",
+      "hidden_emotion": "Vulnerable Health Apprehension over Medication Efficacy & Safety"
+    },
+    {
+      "domain": "academic_grievance",
+      "pattern": "\\b(strict rules|permission to go out|management fee|extra class|cannot code|opinion of students)\\b",
+      "hidden_emotion": "Systemic Disillusionment & Academic Distress"
+    },
+    {
+      "domain": "civility_frustration",
+      "pattern": "\\b(fine|okay|whatever|no problem)\\b.*\\b(anyway|suppose|nevermind)\\b",
+      "hidden_emotion": "Repressed Frustration Behind Civility"
+    },
+    {
+      "domain": "dispute",
+      "pattern": "\\b(as expected|of course|naturally)\\b.*\\b(failed|delayed|wrong)\\b",
+      "hidden_emotion": "Cynical Resignation & Distrust"
+    }
+  ]
+}

@@ -1,0 +1,442 @@
+{
+  "dataset_info": {
+    "name": "Hierarchical Contextual Document Intent Classification Dataset",
+    "version": "6.0",
+    "description": "Multi-domain dataset defining terminal objectives, contextual flow patterns, and semantic descriptions for accurate long-document intent classification across medical, academic, payroll, consumer, and corporate domains.",
+    "total_intents": 18
+  },
+  "intents": {
+    "Medical & Clinical Consultation Inquiry": {
+      "keywords": [
+        "physician consultation",
+        "doctor consultation",
+        "clinical evaluation",
+        "medical examination",
+        "symptom progression",
+        "treatment plan",
+        "clinical diagnosis",
+        "health assessment",
+        "medical history",
+        "patient symptoms",
+        "specialist referral",
+        "clinical advice",
+        "hospital consultation",
+        "healthcare consultation",
+        "chronic condition",
+        "medical guidance"
+      ],
+      "description": "A patient or caregiver documents ongoing symptoms, clinical history, and diagnostic examinations, seeking comprehensive physician consultation, formal medical diagnosis, and a structured clinical treatment plan.",
+      "sample_phrases": [
+        "I am sharing my complete clinical history and symptoms to seek a comprehensive medical consultation and treatment roadmap.",
+        "Following the onset of persistent symptoms, I am consulting the physician for a formal clinical evaluation and treatment recommendations.",
+        "Please review the attached symptom logs and advise on the recommended clinical next steps."
+      ],
+      "simple_reason": "The author is detailing clinical symptoms and medical history to seek a physician consultation and structured treatment plan."
+    },
+    "Diagnostic Test Clarification & Second Opinion Request": {
+      "keywords": [
+        "diagnostic test",
+        "lab results",
+        "blood test results",
+        "mri scan",
+        "ct scan",
+        "biopsy report",
+        "pathology report",
+        "x-ray report",
+        "ultrasound findings",
+        "abnormal markers",
+        "second opinion",
+        "interpret test results",
+        "clarify lab report",
+        "radiology report",
+        "diagnostic findings",
+        "test interpretation"
+      ],
+      "description": "A patient who has undergone diagnostic scans, blood tests, or biopsy examinations seeks clinical clarification, detailed interpretation of abnormal findings, or an expert second medical opinion.",
+      "sample_phrases": [
+        "I am requesting a second clinical opinion regarding the abnormal markers identified in my recent MRI and pathology report.",
+        "Could the specialist clarify the diagnostic implications of the elevated levels shown in my blood test panel?",
+        "I need professional clarification on what these radiology scan findings indicate for my health."
+      ],
+      "simple_reason": "The author is seeking expert clarification and a second clinical opinion regarding diagnostic scan and laboratory test results."
+    },
+    "Prescription Dosage & Medication Inquiry": {
+      "keywords": [
+        "prescription medication",
+        "dosage adjustment",
+        "medication schedule",
+        "adverse side effects",
+        "drug interaction",
+        "prescription refill",
+        "tablet dosage",
+        "pharmacotherapy",
+        "allergic reaction",
+        "medication side effect",
+        "prescribed drug",
+        "how to take medication",
+        "dosage confusion",
+        "alternative medication"
+      ],
+      "description": "A patient experiencing medication side effects, dosage uncertainties, or drug interactions seeks physician or pharmacist guidance regarding prescription adjustment or dosage schedules.",
+      "sample_phrases": [
+        "I am experiencing dizziness and nausea after starting the prescribed medication and request advice on dosage adjustment.",
+        "Please clarify whether this new prescription interacts with my ongoing daily medications.",
+        "I am inquiring about adjusting my medication schedule to mitigate adverse side effects."
+      ],
+      "simple_reason": "The author is seeking clinical guidance regarding prescription medication, dosage adjustments, and side effect management."
+    },
+    "Post-Operative Recovery & Symptom Management": {
+      "keywords": [
+        "post-operative recovery",
+        "surgical procedure",
+        "after surgery",
+        "post-op care",
+        "wound healing",
+        "surgical incision",
+        "post-surgery pain",
+        "discharge instructions",
+        "post-operative follow-up",
+        "surgical recovery",
+        "drainage from incision",
+        "rehabilitation protocol",
+        "post-surgical swelling",
+        "orthopedic surgery recovery"
+      ],
+      "description": "A patient recovering from a surgical or clinical procedure documents recovery milestones, post-operative symptoms, incision healing, or rehabilitation protocols seeking physician follow-up.",
+      "sample_phrases": [
+        "Following my surgical procedure last week, I am monitoring post-operative incision healing and seeking follow-up recovery guidance.",
+        "I have questions regarding the prescribed physical rehabilitation protocol and post-surgery swelling management.",
+        "Please evaluate my post-operative progress and advise on allowable physical activity."
+      ],
+      "simple_reason": "The author is seeking clinical follow-up and guidance on post-operative recovery, wound care, and rehabilitation."
+    },
+    "Salary/Payroll Deduction Correction Request": {
+      "keywords": [
+        "incorrect attendance",
+        "attendance record",
+        "attendance records",
+        "attendance discrepancy",
+        "salary deduction",
+        "deducted from salary",
+        "withheld salary",
+        "payroll deduction",
+        "payroll discrepancy",
+        "payroll adjustment",
+        "restore withheld amount",
+        "restore deducted salary",
+        "reimburse deducted pay",
+        "timesheet mismatch",
+        "marked absent incorrectly",
+        "biometric discrepancy",
+        "attendance corrected",
+        "payroll department",
+        "salary restoration",
+        "unjustified deduction",
+        "pay discrepancy",
+        "salary slip error"
+      ],
+      "description": "An employee discovers incorrect attendance or biometric records that caused an unjustified salary deduction, submits evidence to administration/payroll, gets the attendance discrepancy verified, and formally requests the complete restoration and reimbursement of the incorrectly deducted salary amount.",
+      "sample_phrases": [
+        "I am requesting the correction of my attendance record and the immediate reimbursement of the salary amount deducted in error.",
+        "Following the verification of my biometric logs with HR and payroll, please process the payroll adjustment to restore my withheld wages.",
+        "Due to an administrative timesheet mismatch, my pay was deducted; I request that the deducted amount be credited back to my account."
+      ],
+      "simple_reason": "The author is requesting the formal correction of erroneous attendance records and the prompt restoration of incorrectly deducted salary funds."
+    },
+    "Project Submission Deadline Extension Request": {
+      "keywords": [
+        "deadline extension",
+        "extension request",
+        "additional time",
+        "more time to submit",
+        "extend the deadline",
+        "deadline pressure",
+        "project submission",
+        "final submission",
+        "submit the project",
+        "team project",
+        "group project",
+        "technical bugs",
+        "implementation issues",
+        "faculty",
+        "professor",
+        "project guide",
+        "granted an extension",
+        "request extra time",
+        "delayed submission",
+        "submission date",
+        "due date"
+      ],
+      "description": "Students or team members working on an academic or engineering project who encounter technical blockers, bugs, or deadline pressure, and formally request an extension of the submission deadline from faculty or management.",
+      "sample_phrases": [
+        "We are writing to formally request a deadline extension for our project submission due to unexpected technical bugs.",
+        "Due to integration challenges, our team reached out to the professor to ask for additional time to complete the implementation.",
+        "We requested extra time for testing and were granted an extension to finalize our project report."
+      ],
+      "simple_reason": "The author is requesting an extension on the project submission deadline to resolve technical blockers and complete required deliverables."
+    },
+    "Academic & Institutional Grievance": {
+      "keywords": [
+        "college rules",
+        "campus rules",
+        "strict rules",
+        "university policy",
+        "school rules",
+        "teacher competence",
+        "management fee",
+        "permission to go out",
+        "extra class",
+        "saturday class",
+        "opinion of students",
+        "teaching quality",
+        "curriculum issue",
+        "administration grievance",
+        "college management",
+        "hostel rules"
+      ],
+      "description": "Students or guardians raising formal grievances regarding college/school management, restrictive campus rules, teaching quality, or administrative decisions.",
+      "sample_phrases": [
+        "The college management imposes unreasonably strict rules without considering student welfare.",
+        "We have serious concerns about faculty teaching competence and mandatory weekend attendance.",
+        "Please take student feedback into consideration regarding institutional policies."
+      ],
+      "simple_reason": "The author is expressing formal grievances against institutional policies, administrative restrictions, and teaching standards."
+    },
+    "Product Return & Refund Request": {
+      "keywords": [
+        "return the item",
+        "return the product",
+        "appropriate refund",
+        "receive a refund",
+        "money back",
+        "refund",
+        "reimbursement for item",
+        "return money",
+        "cancel order",
+        "chargeback",
+        "return procedure",
+        "full refund",
+        "return and refund",
+        "send it back",
+        "return process",
+        "return for refund",
+        "unfortunate purchase"
+      ],
+      "description": "Customer wants to return a purchased item and obtain a full or partial financial refund after troubleshooting or defective performance.",
+      "sample_phrases": [
+        "I believe returning the product and receiving the appropriate refund is the only viable resolution.",
+        "Please initiate the return process and issue a complete refund for this defective item.",
+        "After troubleshooting failed, I am requesting a formal return procedure and refund."
+      ],
+      "simple_reason": "The author wants to return the purchased product and receive a complete financial refund due to unresolved product issues."
+    },
+    "Product Defect & Quality Complaint": {
+      "keywords": [
+        "damaged product",
+        "broken item",
+        "faulty device",
+        "defective hardware",
+        "poor build quality",
+        "worst product",
+        "flawed manufacturing",
+        "substandard quality",
+        "malfunctioning",
+        "inferior quality",
+        "damaged upon arrival",
+        "fell apart"
+      ],
+      "description": "User is lodging a formal complaint detailing physical damage, manufacturing defects, or unacceptable product quality.",
+      "sample_phrases": [
+        "The delivered item was completely cracked and unusable upon delivery.",
+        "The build quality is unacceptable and the device stopped functioning within two days."
+      ],
+      "simple_reason": "The author is formally complaining about physical or operational defects in a product and demanding accountability."
+    },
+    "Service Cancellation & Account Termination": {
+      "keywords": [
+        "cancel subscription",
+        "terminate account",
+        "close my account",
+        "cancel membership",
+        "stop auto-renewal",
+        "opt out",
+        "discontinue service",
+        "delete my account",
+        "end subscription",
+        "cancel recurring service",
+        "delete billing profile"
+      ],
+      "description": "User wants to terminate their account, cancel a recurring subscription/membership, and stop all ongoing billing.",
+      "sample_phrases": [
+        "I request the immediate cancellation of my recurring subscription and closure of my account.",
+        "Please ensure auto-renewal is terminated and confirm my account deletion."
+      ],
+      "simple_reason": "The author is requesting the immediate termination of their account and cancellation of recurring services."
+    },
+    "Job Application Status Inquiry & Follow-up": {
+      "keywords": [
+        "job application",
+        "interview follow-up",
+        "application status",
+        "hiring process",
+        "candidacy",
+        "interview result",
+        "recruiter",
+        "hiring manager",
+        "status of my application",
+        "next round",
+        "submitted my resume",
+        "position update"
+      ],
+      "description": "Job applicant following up on the status of their submitted application, interview results, or next steps in the recruitment process.",
+      "sample_phrases": [
+        "I am writing to follow up on the status of my job application submitted last week.",
+        "I would appreciate an update regarding the timeline for the next round of interviews."
+      ],
+      "simple_reason": "The author is inquiring about the progress and current status of their job application or interview evaluation."
+    },
+    "Travel Delay & Cancellation Compensation Request": {
+      "keywords": [
+        "flight delay",
+        "train delay",
+        "flight cancelled",
+        "trip cancellation",
+        "missed connection",
+        "lost luggage",
+        "travel compensation",
+        "airline reimbursement",
+        "delay compensation",
+        "boarding issue",
+        "hotel voucher",
+        "travel disruption",
+        "statutory passenger rights"
+      ],
+      "description": "Traveler experiencing severe delays, flight/train cancellations, or lost baggage and seeking formal compensation or expense reimbursement.",
+      "sample_phrases": [
+        "Due to the 6-hour flight delay and missed connecting flight, I am filing a formal claim for statutory compensation.",
+        "I am requesting reimbursement for the additional hotel and meal expenses incurred during the airline cancellation."
+      ],
+      "simple_reason": "The author is seeking financial compensation and reimbursement for travel disruptions, delays, or cancellations."
+    },
+    "Billing & Payment Dispute Correction": {
+      "keywords": [
+        "overcharged",
+        "double charged",
+        "unauthorized transaction",
+        "hidden fee",
+        "billing error",
+        "wrong invoice",
+        "charged twice",
+        "pricing discrepancy",
+        "incorrect charge",
+        "billing dispute"
+      ],
+      "description": "Customer is disputing an incorrect charge, unrecognized fee, or duplicate invoice transaction and seeking financial adjustment.",
+      "sample_phrases": [
+        "I was billed twice on my credit card statement for a single transaction.",
+        "Please review the invoice and reverse the unauthorized hidden charges immediately."
+      ],
+      "simple_reason": "The author is disputing an incorrect or duplicate billing charge and demanding immediate financial correction."
+    },
+    "Technical Support & Troubleshooting": {
+      "keywords": [
+        "error code",
+        "crash log",
+        "system bug",
+        "cannot login",
+        "failed to launch",
+        "software glitch",
+        "installation error",
+        "how to configure",
+        "patch update",
+        "troubleshoot guide",
+        "connection timeout",
+        "app freezing",
+        "syntax error",
+        "runtime exception"
+      ],
+      "description": "User is actively experiencing a technical software or hardware issue and seeking technical troubleshooting assistance as their primary goal.",
+      "sample_phrases": [
+        "The software crashes immediately with error code 0x80004005 upon startup.",
+        "I need technical assistance to configure database connectivity and resolve runtime errors."
+      ],
+      "simple_reason": "The author is reporting an active technical barrier or software error and seeking troubleshooting support."
+    },
+    "Legal Dispute & Formal Contract Notice": {
+      "keywords": [
+        "legal counsel",
+        "attorney",
+        "court litigation",
+        "breach of contract",
+        "liability",
+        "sue",
+        "lawsuit",
+        "damages claim",
+        "statutory rights",
+        "formal legal notice",
+        "arbitration",
+        "legal dispute"
+      ],
+      "description": "User is citing legal clauses, contract terms, or formally notifying of impending legal arbitration or statutory damages.",
+      "sample_phrases": [
+        "This serves as formal notice of contract breach prior to escalating to legal litigation.",
+        "My attorney will initiate formal proceedings if this contractual violation is not resolved."
+      ],
+      "simple_reason": "The author is giving formal notice of a legal dispute regarding contract terms or rights violations."
+    },
+    "Workplace & Employment Grievance": {
+      "keywords": [
+        "workplace harassment",
+        "unpaid overtime",
+        "salary delay",
+        "toxic manager",
+        "hr grievance",
+        "working conditions",
+        "employment contract breach",
+        "wrongful termination",
+        "workplace safety"
+      ],
+      "description": "Employee reporting unfair workplace practices, managerial misconduct, salary withholding, or HR policy violations.",
+      "sample_phrases": [
+        "I am submitting a formal HR grievance regarding unpaid overtime and hostile managerial conduct.",
+        "Management has repeatedly failed to address safety and compensation standards in our department."
+      ],
+      "simple_reason": "The author is submitting a workplace grievance regarding unfair employment conditions or management conduct."
+    },
+    "Feature Proposal & Constructive Feedback": {
+      "keywords": [
+        "feature request",
+        "product suggestion",
+        "improvement idea",
+        "user experience suggestion",
+        "would love to see",
+        "feature proposal",
+        "enhancement idea",
+        "constructive feedback"
+      ],
+      "description": "User offering positive, constructive suggestions, UI/UX improvement ideas, or future feature requests.",
+      "sample_phrases": [
+        "The tool is great and adding batch processing would significantly improve user experience.",
+        "Here are three constructive suggestions to enhance workflow productivity in the next update."
+      ],
+      "simple_reason": "The author is providing constructive feedback and suggestions for future product enhancements."
+    },
+    "General Informational & Guidance Inquiry": {
+      "keywords": [
+        "general inquiry",
+        "how does it work",
+        "documentation clarification",
+        "more information",
+        "guidelines regarding",
+        "process explanation",
+        "policy details"
+      ],
+      "description": "User seeking standard information, policy guidance, procedural clarification, or answers to general questions.",
+      "sample_phrases": [
+        "Could you provide more information regarding the onboarding guidelines?",
+        "I would appreciate clarification on how the documentation submission process works."
+      ],
+      "simple_reason": "The author is seeking information, guidance, or clarification on specific procedures."
+    }
+  }
+}
